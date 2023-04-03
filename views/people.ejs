@@ -1,0 +1,59 @@
+<%- include ("includes/header") %>
+
+    <section>
+        <div class="gap gray-bg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" id="page-contents">
+
+                            <div class="col-md-3">
+                                <%- include ("includes/left-sidebar") %>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="central-meta">
+                                    <p style="color: blue;">People you may know</p>
+
+                                    <% if(people.length){ %>
+                                        <%  for(let i=0; i < people.length; i++){ %>
+                                    <div class="central-meta item">
+
+                                        <div class="friend-info">
+
+                                            <figure>
+                                                <img src="<%=people[i].profileimgUrl%>" style="width: 60px; height: 60px; object-fit: cover;">
+                                            </figure>
+
+                                            <div class="friend-name">
+                                                <ins>
+                                                    <a href="/peopleProfile/<%=people[i]._id%>"><%=people[i].name%></a>
+                                                </ins>
+                                                <span>myNetwork.com</span>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <% } %>
+                                    <% }else{ %>
+                                    <P>Not Found</P>
+                                    <% } %>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+
+
+    <%- include ("includes/footer") %>

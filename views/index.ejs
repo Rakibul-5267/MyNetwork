@@ -1,0 +1,124 @@
+<%- include ("includes/userheader") %>
+
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row" id="page-contents">
+
+							<div class="col-md-3">
+								<%- include ("includes/left-sidebar") %>
+							</div>
+
+							<div class="col-md-6">
+
+								<div class="central-meta">
+									<figure>
+										<img src="<%=user.profileimgUrl%>"
+											style="width: 60px; height: 80px; object-fit: cover;">
+									</figure>
+									<div class="central-meta item">
+										<div class="user-post">
+
+											<div id="add-post-box">
+												<form action="/submitPost" method="post" enctype="multipart/form-data">
+													<textarea name="message" placeholder="Write something"></textarea>
+													<input type="file" name="postImage" />
+													<div style="text-align: right;">
+														<input type="submit" value="post" style="color: rgb(39, 39, 153);">
+																
+													</div>
+												</form>
+											</div>
+
+											<!-- <div class="loadMore" id="newsfeed">
+
+												<p>kcdjdbja m</p>
+											</div> -->
+
+										</div>
+
+									</div>
+
+								</div>
+								<!-- viewPost START -->
+								<% if(post.length){ %>
+									<% for(let i=0; i < post.length; i++){ %>
+										<div class="central-meta item">
+											<div class="friend-info">
+
+												<figure>
+													<img src="<%=post[i].postByUser[0].profileimgUrl%>"
+														style="width: 60px; height: 70px; object-fit: cover;">
+												</figure>
+
+												<div class="friend-name">
+													<div style="text-align: right;">
+														<a href=""><i class="fa-solid fa-ellipsis-vertical fa-lg"></i></a>
+													</div>
+													<ins>
+														
+															<%=post[i].postByUser[0].name%>
+														
+													</ins>
+													<span>Publish:<%=post[i].createdAt%></span>
+
+												</div>
+
+												<div class="post-meta">
+
+													<div class="description">
+
+														<p style="color: rgb(104, 84, 84);">
+															<%=post[i].message%>
+														</p>
+														<div>
+															<img src="<%=post[i].imageUrl%>">
+														</div>
+														<br>
+													</div>
+
+
+													<div id="post-likes-section">
+
+													</div>
+												</div>
+											</div>
+
+											<div id='post-comments-'>
+												<figure>
+													<img src="<%=user.profileimgUrl%>"
+														style="width: 20px; height: 30px; object-fit: cover;">
+												</figure>
+												<form action="/addComment/<%=post[i]._id%>" method="post">
+													<label for="comment">Comment:</label>
+													<input type="text" id="comment" name="comment">
+													<input type="submit" value="post" style="color: rgb(39, 39, 153);">
+												</form>
+												<div style="text-align: right;color: rgb(76, 76, 165);">
+													<a href="/postDetail/<%=post[i]._id%>"><p>Comments</p></a>
+												</div>
+											</div>
+
+										</div>
+										<% } %>
+											<% }else{ %>
+												<P>Not Found</P>
+												<% } %>
+													<!-- viewPost end -->
+
+							</div>
+
+							<div class="col-md-3">
+								<%- include ("includes/right-sidebar") %>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<%- include ("includes/footer") %>

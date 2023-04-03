@@ -1,0 +1,142 @@
+<%- include ("includes/header") %>
+    <div style="margin-left: 30px; ">
+        <p style="color: blue;"><b>UserPost</b></p>
+    </div>
+    <section>
+        <div class="gap gray-bg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" id="page-contents">
+
+                            <div class="col-md-3">
+                                <%- include ("includes/left-sidebar") %>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="central-meta">
+                                    <p style="font-size: larger;color: blueviolet;">
+                                        <b>
+                                            <%=user.name%>
+                                        </b>
+                                    </p>
+                                    <figure>
+                                        <img class="profile-image" id="profile-image"
+                                            style="width: 150px; height: 150px; object-fit: cover;"
+                                            src="<%=user.profileimgUrl%>">
+
+                                    </figure>
+
+
+                                </div>
+                                <% if(userPost.length){ %>
+                                    <% for( let i=0; i < userPost.length; i++){ %>
+                                        <div class="central-meta item">
+                                            <div style="text-align: right;">
+                                                
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                <a href="/deletPost/<%=userPost[i]._id%>"><i class="fa-regular fa-trash-can" style="color: #f66151;"></i></a>
+                                            </div>
+                                            <!-- buttom START -->
+                                            <!-- Button trigger modal -->
+                                            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+   -->
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">updatePost
+                                                            </h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="/updatePost/<%=userPost[i]._id%>" method="post">
+                                                            <div class="modal-body">
+
+                                                                <textarea name="message"
+                                                                    placeholder="<%=userPost[i].message%>"></textarea>
+
+                                                                
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- button END -->
+                                            <div class="user-post">
+                                                <div class="friend-info">
+
+                                                    <figure>
+                                                        <img src="<%=userPost[i].adminPost[0].profileimgUrl%>"
+                                                            style="width: 60px; height: 60px; object-fit: cover;">
+                                                    </figure>
+
+                                                    <div class="friend-name">
+                                                        <ins>
+
+                                                            <%=userPost[i].adminPost[0].name%>
+
+                                                        </ins>
+
+                                                        <span>
+                                                            <%=userPost[i].adminPost[0].name%>
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="post-meta">
+
+                                                        <div class="description">
+                                                            <p style="color: rgb(25, 25, 119);">
+                                                                <%=userPost[i].message%>
+                                                            </p>
+                                                        </div>
+
+
+                                                        <img src="<%=userPost[i].imageUrl%>">
+
+
+
+
+
+                                                        <div id="post-likes-section"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div id='post-comments-'></div>
+
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                            <% }else{ %>
+                                                <P>Not Found</P>
+                                                <% } %>
+
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <%- include ("includes/right-sidebar") %>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <%- include ("includes/footer") %>

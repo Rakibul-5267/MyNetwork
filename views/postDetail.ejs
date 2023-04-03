@@ -1,0 +1,139 @@
+<%- include ("includes/header") %>
+
+    <section>
+        <div class="gap gray-bg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" id="page-contents">
+
+                            <div class="col-md-3">
+                                <%- include ("includes/left-sidebar") %>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="central-meta">
+                                    <figure>
+                                        <img src="<%=singlePost[0].postByUser[0].profileimgUrl%>"
+                                            style="width: 60px; height: 80px; object-fit: cover;">
+                                    </figure>
+                                    <p style="color: black;">
+                                        <%=singlePost[0].message%>
+                                    </p>
+                                    <img src="<%=singlePost[0].imageUrl%>" alt="">
+                                </div>
+                                <!-- <p style="color: rgb(69, 69, 133);font-size: larger;text-align: center;"><b>All Comments
+                                        Here</b></p> -->
+                                <% if(comments.length){ %>
+                                    <p style="color: rgb(165, 41, 57);font-size: larger;text-align: left;"><b>Comments(<%=comments.length%>)</b></p>
+                                    <% for( let i = 0; i < comments.length; i++){ %>
+                                        
+                                    <div class="central-meta item">
+                                        <!-- comments EDIT & UPDATE -->
+                                        <%   if(comments[i].commentsId === userId){ %>
+                                        <div style="text-align: right;">
+                                                
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a href="/commentDelet/<%=comments[i]._id%>"><i class="fa-regular fa-trash-can" style="color: #f66151;"></i></a>
+                                        </div> 
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">updatePost
+                                                    </h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="/updateComment/<%=comments[i]._id%>" method="post">
+                                                    <div class="modal-body">
+
+                                                       <input type="text" name="comment" value="<%=comments[i].comment%>">
+
+                                                        
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <%  } %>
+<!-- comments EDIT & UPDATE // END -->
+                                    <div class="user-post">
+                                        <div class="friend-info">
+
+                                            <figure>
+                                                <img src="<%=comments[i].commentByUser[0].profileimgUrl%>" style="width: 60px; height: 60px; object-fit: cover;">
+                                            </figure>
+
+                                            <div class="friend-name">
+                                                <ins>
+                                                    <%=comments[i].commentByUser[0].name%>
+                                                    
+                                                </ins>
+
+                                                <!-- here put post date -->
+
+                                                <span>Comment:</span>
+                                            </div>
+
+                                            <div class="post-meta">
+
+                                                <div class="description">
+                                                    <p>
+
+                                                    </p>
+                                                </div>
+
+                                                <!-- here comments like and emoji -->
+                                                <img src="">
+
+
+
+
+                                                <div id="post-likes-section">
+                                                    <p style="font-size: large;color: rgb(25, 83, 105);"><i><%=comments[i].comment%></i></p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div id='post-comments'>
+
+                                        </div>
+
+                                    </div>
+                            </div>
+
+                            <% } %>
+                                <% }else{ %>
+                                    <P>No Comment is Here.</P>
+                                    <% } %>
+
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <%- include ("includes/right-sidebar") %>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+
+
+    <%- include ("includes/footer") %>
